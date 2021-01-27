@@ -3,7 +3,7 @@ package com.booklibrary.members;
 import javax.faces.bean.ManagedBean;
 
 @ManagedBean
-public class Members {
+public class Member {
 
 	
 	private int memberID;
@@ -13,11 +13,11 @@ public class Members {
 	private String idCardNumber;
 	private String status;
 	
-	public Members() {
+	public Member() {
 		
 	}
 
-	public Members(int memberID, String name, String address, String phoneNumber, String idCardNumber, String status) {
+	public Member(int memberID, String name, String address, String phoneNumber, String idCardNumber, String status) {
 		super();
 		this.memberID = memberID;
 		this.name = name;

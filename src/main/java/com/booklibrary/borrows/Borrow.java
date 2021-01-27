@@ -5,59 +5,59 @@ import java.sql.Date;
 import javax.faces.bean.ManagedBean;
 
 @ManagedBean
-public class Borrows {
+public class Borrow {
 	
-	private int borrowID;
-	private int memberID;
-	private int stockID;
+	private int borrowId;
+	private int memberId;
+	private int stockId;
 	private Date dateOfBorrow;
 	private Date dueDate;
 	private Date dateOfReturn;
 	
 	
-	public Borrows() {
+	public Borrow() {
 		
 	}
 
 
-	public Borrows(int borrowID, int memberID, int stockID, Date dateOfBorrow, Date dueDate, Date dateOfReturn) {
+	public Borrow(int borrowId, int memberId, int stockId, Date dateOfBorrow, Date dueDate, Date dateOfReturn) {
 		super();
-		this.borrowID = borrowID;
-		this.memberID = memberID;
-		this.stockID = stockID;
+		this.borrowId = borrowId;
+		this.memberId = memberId;
+		this.stockId = stockId;
 		this.dateOfBorrow = dateOfBorrow;
 		this.dueDate = dueDate;
 		this.dateOfReturn = dateOfReturn;
 	}
 
 
-	public int getBorrowID() {
-		return borrowID;
+	public int getBorrowId() {
+		return borrowId;
 	}
 
 
-	public void setBorrowID(int borrowID) {
-		this.borrowID = borrowID;
+	public void setBorrowId(int borrowId) {
+		this.borrowId = borrowId;
 	}
 
 
-	public int getMemberID() {
-		return memberID;
+	public int getMemberId() {
+		return memberId;
 	}
 
 
-	public void setMemberID(int memberID) {
-		this.memberID = memberID;
+	public void setMemberID(int memberId) {
+		this.memberId = memberId;
 	}
 
 
-	public int getStockID() {
-		return stockID;
+	public int getStockId() {
+		return stockId;
 	}
 
 
-	public void setStockID(int stockID) {
-		this.stockID = stockID;
+	public void setStockId(int stockId) {
+		this.stockId = stockId;
 	}
 
 

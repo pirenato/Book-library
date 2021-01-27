@@ -5,7 +5,7 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean
 public class Stock {
 	
-	private Integer stockID;
+	private Integer stockId;
 	private String author;
 	private String title;
 	private String category;
@@ -17,19 +17,19 @@ public class Stock {
 
 	public Stock(Integer stockID, String author, String title, String category, int numberOfCopies) {
 		super();
-		this.stockID = stockID;
+		this.stockId = stockID;
 		this.author = author;
 		this.title = title;
 		this.category = category;
 		this.numberOfCopies = numberOfCopies;
 	}
 
-	public Integer getStockID() {
-		return stockID;
+	public Integer getStockId() {
+		return stockId;
 	}
 
-	public void setStockID(Integer stockID) {
-		this.stockID = stockID;
+	public void setStockId(Integer stockID) {
+		this.stockId = stockID;
 	}
 
 	public String getAuthor() {
