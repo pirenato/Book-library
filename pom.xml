@@ -24,7 +24,7 @@
 			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -32,22 +32,22 @@
 			<version>3.1.0</version>
 			<scope>provide</scope>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/com.sun.faces/jsf-api -->
 		<dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-api</artifactId>
-			<version>2.2.8</version>
-			<scope>compile</scope>
+			<version>2.2.20</version>
 		</dependency>
-		
+
+
 		<!-- https://mvnrepository.com/artifact/com.sun.faces/jsf-impl -->
 		<dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-impl</artifactId>
-			<version>2.2.8</version>
-			<scope>compile</scope>
+			<version>2.2.20</version>
 		</dependency>
+
 
 		<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-servlet-api -->
 		<dependency>
@@ -63,7 +63,7 @@
 			<artifactId>primefaces</artifactId>
 			<version>8.0</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
 			<groupId>mysql</groupId>
