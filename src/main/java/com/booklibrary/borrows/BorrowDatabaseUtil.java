@@ -51,7 +51,7 @@ public class BorrowDatabaseUtil {
 	 * @return ArrayList with all the records from the database's borrows table
 	 * @throws Exception
 	 */
-	public List<Borrow> getBorrowek() throws Exception {
+	public List<Borrow> getBorrows() throws Exception {
 		List<Borrow> borrowList = new ArrayList<>();
 
 		Connection connection = null;
@@ -190,7 +190,7 @@ public class BorrowDatabaseUtil {
 			java.util.Date today = calendar.getTime();
 			java.sql.Date sqlToday = new java.sql.Date(today.getTime());
 
-			// calculating due date
+			// calculating due date by adding a month to today's date
 			calendar.add(java.util.Calendar.MONTH, 1);
 			java.util.Date dueDate = calendar.getTime();
 			java.sql.Date sqlDueDate = new java.sql.Date(dueDate.getTime());
@@ -204,7 +204,7 @@ public class BorrowDatabaseUtil {
 
 			statement.execute();
 
-			// 1-el csokkenti a darabszamot
+			// decrase number of copies by 1
 			stockDatabaseUtil.decreaseNumberOfCopies(stock);
 		} finally {
 			close(connection, statement);
@@ -247,6 +247,83 @@ public class BorrowDatabaseUtil {
 			// darabszam novelese
 			stockDatabaseUtil.increaseNumberOfStock(stock);
 
+		} finally {
+			close(connection, statement);
+		}
+
+	}
+	
+	/**
+	 * Method to check if the given user is active
+	 * @param memberId the ID of the member in the database we want to examine
+	 * @return true if the member is active, false if the member is inactive
+	 * @throws Exception
+	 */
+	public boolean isActive(int memberId) throws Exception {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+
+		try {
+			connection = getConnection();
+
+			String sql = "select status FROM library.members WHERE member_ID = ?";
+
+			statement = connection.prepareStatement(sql);
+
+			statement.setInt(1, memberId);
+
+			resultSet = statement.executeQuery();
+
+			String status;
+			if (resultSet.next()) {
+				status = resultSet.getString(1);
+			} else {
+				throw new Exception("The entered member doesn't exist or is inactive." );
+			}
+			
+			if(status.equals("active"))
+				return true;
+			else
+				return false;
+		} finally {
+			close(connection, statement, resultSet);
+		}
+	}
+	
+	/**
+	 * Record when a borrowed item is returned. 
+	 * The date of return is automatically recorded, 
+	 * and the quantity of the item is increased. 
+	 * @param borrowId the ID of the returned borrow
+	 * @throws Exception
+	 */
+	public void itemReturned(int borrowId) throws Exception {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		Borrow borrow = getBorrow(borrowId);
+		StockDatabaseUtil stockDatabaseUtil = StockDatabaseUtil.getInstance();
+		Stock stock = stockDatabaseUtil.getStock(borrow.getStockId());
+
+		try {
+			connection = getConnection();
+
+			String sql = "update borrows " + "set date_of_return = ? " + "where borrow_ID = ?";
+
+			statement = connection.prepareStatement(sql);
+
+			// Format date for MySQL
+			java.util.Calendar calendar = java.util.Calendar.getInstance();
+			java.util.Date today = calendar.getTime();
+			java.sql.Date sqlToday = new java.sql.Date(today.getTime());
+
+			statement.setDate(1, sqlToday);
+			statement.setInt(2, borrowId);
+
+			statement.execute();
+
+			// increase number of copies
+			stockDatabaseUtil.increaseNumberOfStock(stock);
 		} finally {
 			close(connection, statement);
 		}
